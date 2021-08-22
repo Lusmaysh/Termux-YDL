@@ -12,7 +12,7 @@ def banner():
 ╔════════════════════════════════════════╗
 ║{ijm} ♚ Project : ᴛᴇʀᴍᴜx-ʏᴅʟ™                {brm}║
 ║{ijm} ♚ Author  : Lusmaysh                   {brm}║
-║{ijm} ♚ Github  : -                          {brm}║
+║{ijm} ♚ Github  : github.com/Lusmaysh        {brm}║
 ║{ijm} ♚ Website : -                          {brm}║
 ╠════════════════════════════════════════╝""")
 
