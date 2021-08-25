@@ -1,2 +1,2 @@
 # Termux-YDL
-bash Required.sh
+bash setup.sh
