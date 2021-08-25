@@ -37,7 +37,6 @@ def init():
 		print(f"{brm}╚═{ijm}▶ Success")
 		with open("/data/data/com.termux/files/home/bin/termux-url-opener","w") as eat:
 			eat.write("youtube-dl $1")
-			eat.close()
 			exit()
 	banner()
 	type = input(f"""{brm}╠═{ijm}▶ 1. Video Only
@@ -77,7 +76,7 @@ def init():
 {brm}╠═{ijm}▶ 2. en (English Subtitle)
 {brm}╠═{ijm}▶ 3. en-US (English-US Subtitle)
 {brm}╚═{ijm}▶ [𝗦𝗲𝗹𝗲𝗰𝘁 The Language] ➳ """)
-		if lang == 'id' or lang == 'en' or lang == 'en-US':
+		if lang == "1":
 			banner()
 			format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
 {brm}╠═{ijm}▶ 2. Video 360p
@@ -88,19 +87,71 @@ def init():
 {brm}╠═{ijm}▶ 7. Video Recomendation
 {brm}╚═{ijm}▶ [𝗦𝗲𝗹𝗲𝗰𝘁 𝗔 𝗙𝗼𝗿𝗺𝗮𝘁] ➳ """)
 			if format == '1':
-				Rerun("-f 140 --write-sub --sub-lang {lang} --convert-subs ass")
+				Rerun("-f 140 --write-sub --sub-lang id --convert-subs ass")
 			elif format == '2':
-				Rerun('-f "mp4[height<=360]" --write-sub --sub-lang {lang} --convert-subs ass')
+				Rerun('-f "mp4[height<=360]" --write-sub --sub-lang id --convert-subs ass')
 			elif format == '3':
-				Rerun('-f "mp4[height<=480]" --write-sub --sub-lang {lang} --convert-subs ass')
+				Rerun('-f "mp4[height<=480]" --write-sub --sub-lang id --convert-subs ass')
 			elif format == '4':
-				Rerun('-f "mp4[height<=720]" --write-sub --sub-lang {lang} --convert-subs ass')
+				Rerun('-f "mp4[height<=720]" --write-sub --sub-lang id --convert-subs ass')
 			elif format == '5':
-				Rerun('-f "mp4[height<=1080]" --write-sub --sub-lang {lang} --convert-subs ass')
+				Rerun('-f "mp4[height<=1080]" --write-sub --sub-lang id --convert-subs ass')
 			elif format == '6':
-				Rerun('-f "mp4[height<=2160]" --write-sub --sub-lang {lang} --convert-subs ass')
+				Rerun('-f "mp4[height<=2160]" --write-sub --sub-lang id --convert-subs ass')
 			elif format == '7':
-				Rerun('-f "best[height<=2160]" --write-sub --sub-lang {lang} --convert-subs ass')
+				Rerun('-f "best[height<=2160]" --write-sub --sub-lang id --convert-subs ass')
+			else:
+				exit(os.system('clear'))
+		elif lang == "2":
+			banner()
+			format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
+{brm}╠═{ijm}▶ 2. Video 360p
+{brm}╠═{ijm}▶ 3. Video 480p
+{brm}╠═{ijm}▶ 4. Video 720p
+{brm}╠═{ijm}▶ 5. Video 1080p
+{brm}╠═{ijm}▶ 6. Video 2160p
+{brm}╠═{ijm}▶ 7. Video Recomendation
+{brm}╚═{ijm}▶ [𝗦𝗲𝗹𝗲𝗰𝘁 𝗔 𝗙𝗼𝗿𝗺𝗮𝘁] ➳ """)
+			if format == '1':
+				Rerun("-f 140 --write-sub --sub-lang en --convert-subs ass")
+			elif format == '2':
+				Rerun('-f "mp4[height<=360]" --write-sub --sub-lang en --convert-subs ass')
+			elif format == '3':
+				Rerun('-f "mp4[height<=480]" --write-sub --sub-lang en --convert-subs ass')
+			elif format == '4':
+				Rerun('-f "mp4[height<=720]" --write-sub --sub-lang en --convert-subs ass')
+			elif format == '5':
+				Rerun('-f "mp4[height<=1080]" --write-sub --sub-lang en --convert-subs ass')
+			elif format == '6':
+				Rerun('-f "mp4[height<=2160]" --write-sub --sub-lang en --convert-subs ass')
+			elif format == '7':
+				Rerun('-f "best[height<=2160]" --write-sub --sub-lang en --convert-subs ass')
+			else:
+				exit(os.system('clear'))
+		elif lang == "3":
+			banner()
+			format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
+{brm}╠═{ijm}▶ 2. Video 360p
+{brm}╠═{ijm}▶ 3. Video 480p
+{brm}╠═{ijm}▶ 4. Video 720p
+{brm}╠═{ijm}▶ 5. Video 1080p
+{brm}╠═{ijm}▶ 6. Video 2160p
+{brm}╠═{ijm}▶ 7. Video Recomendation
+{brm}╚═{ijm}▶ [𝗦𝗲𝗹𝗲𝗰𝘁 𝗔 𝗙𝗼𝗿𝗺𝗮𝘁] ➳ """)
+			if format == '1':
+				Rerun("-f 140 --write-sub --sub-lang en-US --convert-subs ass")
+			elif format == '2':
+				Rerun('-f "mp4[height<=360]" --write-sub --sub-lang en-US --convert-subs ass')
+			elif format == '3':
+				Rerun('-f "mp4[height<=480]" --write-sub --sub-lang en-US --convert-subs ass')
+			elif format == '4':
+				Rerun('-f "mp4[height<=720]" --write-sub --sub-lang en-US --convert-subs ass')
+			elif format == '5':
+				Rerun('-f "mp4[height<=1080]" --write-sub --sub-lang en-US --convert-subs ass')
+			elif format == '6':
+				Rerun('-f "mp4[height<=2160]" --write-sub --sub-lang en-US --convert-subs ass')
+			elif format == '7':
+				Rerun('-f "best[height<=2160]" --write-sub --sub-lang en-US --convert-subs ass')
 			else:
 				exit(os.system('clear'))
 		else:
@@ -143,8 +194,4 @@ def init():
 		exit(os.system('clear'))
 
 if __name__=='__main__':
-	banner()
-	try:
-		init()
-	except:
-		exit(os.system('clear'))
+	init()
