@@ -1,2 +1,2 @@
 # Termux-YDL
-bash setup.sh
+sh setup.sh
