@@ -1,6 +1,5 @@
-pkg install python
-pip install youtube-dl -y
 pkg install ffmpeg -y
+pip install youtube-dl -y
 mkdir ~/.config/youtube-dl
 mkdir ~/storage/shared/Youtube
 mkdir ~/bin
