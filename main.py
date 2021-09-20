@@ -1,10 +1,16 @@
-# Last Update: 7-9-2021, Author: Lusmaysh
-import os
+# Last Update: 12-9-2021, Author: Lusmaysh
+import os,sys
 ijm="\33[32;1m";brm="\33[36;1m";
-console='--no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%\(title\)s.%\(ext\)s '
+try:
+	import youtube_dl
+except ImportError:
+	try:
+		os.system("pip3 install youtube-dl")
+	except:
+		os.system("pip install youtube-dl")
 
 def banner():
-	os.system('clear')
+	os.system('cls' if os.name=='nt' else 'clear')
 	print(f"""\33[1;31m
           ▄▀▄     ▄▀▄
          ▄█░░▀▀▀▀▀░░█▄
@@ -17,10 +23,10 @@ def banner():
 ║{ijm} ♚ Website : -                          {brm}║
 ╠════════════════════════════════════════╝""")
 
-def Rerun(option):
-	os.system("clear")
-	print(f"{ijm}[•]Starting The Process..")
-	os.system(f"youtube-dl {url} {console} {option}")
+def Rerun(s):
+	os.system('cls' if os.name=='nt' else 'clear')
+	print(f"{brm}[•] {ijm}Starting The Process..")
+	os.system(f"youtube-dl {url} --no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%\(title\)s.%\(ext\)s {s}")
 
 def init():
 	banner()
@@ -28,17 +34,16 @@ def init():
 	url = input(f"{brm}╚═{ijm}▶ [Input URL] ➳ ")
 	while len(url) == 0:
 		init()
-	history = open(".history.txt","a")
-	history.write(f"\n{url}")
-	history.close()
-	if url == 'list':
-		exit(os.system("nano .history.txt"))
-	elif url == 'req':
+	with open(".history.txt","a") as history:
+		history.write(f"{url}\n")
+	if url == 'auto':
 		banner()
-		print(f"{brm}╚═{ijm}▶ Success")
-		with open("/data/data/com.termux/files/home/bin/termux-url-opener","w") as eat:
+		os.system("mkdir -p ~/.config/youtube-dl ~/storage/shared/Youtube ~/bin")
+		with open("$HOME/bin/termux-url-opener","w") as eat:
 			eat.write("youtube-dl $1")
-			exit()
+		with open("$HOME/.config/youtube-dl/config") as config:
+			config.write('--no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f "mp4[height<=2160]"')
+		sys.exit(f"{brm}╚═{ijm}▶ Success")
 	banner()
 	type = input(f"""{brm}╠═{ijm}▶ 1. Video Only
 {brm}╠═{ijm}▶ 2. Video With Subtitle
@@ -70,7 +75,7 @@ def init():
 		elif format == '7':
 			Rerun('-f "best[height<=2160]"')
 		else:
-			exit(os.system('clear'))
+			sys.exit(os.system('clear'))
 	elif type == '2':
 		banner()
 		lang = input(f"""{brm}╠═{ijm}▶ 1. id (Indonesia Subtitle)
@@ -102,7 +107,7 @@ def init():
 			elif format == '7':
 				Rerun('-f "best[height<=2160]" --write-sub --sub-lang id --convert-subs ass')
 			else:
-				exit(os.system('clear'))
+				sys.exit(os.system('clear'))
 		elif lang == "2":
 			banner()
 			format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
@@ -128,7 +133,7 @@ def init():
 			elif format == '7':
 				Rerun('-f "best[height<=2160]" --write-sub --sub-lang en --convert-subs ass')
 			else:
-				exit(os.system('clear'))
+				sys.exit(os.system('clear'))
 		elif lang == "3":
 			banner()
 			format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
@@ -154,9 +159,9 @@ def init():
 			elif format == '7':
 				Rerun('-f "best[height<=2160]" --write-sub --sub-lang en-US --convert-subs ass')
 			else:
-				exit(os.system('clear'))
+				sys.exit(os.system('clear'))
 		else:
-			exit(os.system('clear'))
+			sys.exit(os.system('clear'))
 	elif type == '3':
 		banner()
 		format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
@@ -182,7 +187,7 @@ def init():
 		elif format == '7':
 			Rerun('-f "best[height<=2160]" --write-description')
 		else:
-			exit(os.system('clear'))
+			sys.exit(os.system('clear'))
 	elif type == '4':
 		os.system('clear')
 		print(f"[•]Get Description Info..{brm}")
@@ -192,7 +197,7 @@ def init():
 		print(f"{ijm}[•]Get Subtitle Info..{brm}")
 		os.system(f'youtube-dl {url} --no-mtime --list-subs')
 	else:
-		exit(os.system('clear'))
+		sys.exit(os.system('clear'))
 
 if __name__=='__main__':
 	init()
