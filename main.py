@@ -1,4 +1,3 @@
-# Last Update: 12-9-2021, Author: Lusmaysh
 import os,sys
 ijm="\33[32;1m";brm="\33[36;1m";
 try:
@@ -39,9 +38,9 @@ def init():
 	if url == 'auto':
 		banner()
 		os.system("mkdir -p ~/.config/youtube-dl ~/storage/shared/Youtube ~/bin")
-		with open("$HOME/bin/termux-url-opener","w") as eat:
+		with open("/data/data/com.termux/files/home/bin/termux-url-opener","w") as eat:
 			eat.write("youtube-dl $1")
-		with open("$HOME/.config/youtube-dl/config") as config:
+		with open("/data/data/com.termux/files/home/.config/youtube-dl/config","w") as config:
 			config.write('--no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f "mp4[height<=2160]"')
 		sys.exit(f"{brm}╚═{ijm}▶ Success")
 	banner()
