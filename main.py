@@ -1,12 +1,10 @@
-import os,sys
+# Last Update: 17-10-2021, Author: Lusmaysh
+import os,sys,time
 ijm="\33[32;1m";brm="\33[36;1m";
 try:
 	import youtube_dl
 except ImportError:
-	try:
-		os.system("pip3 install youtube-dl")
-	except:
-		os.system("pip install youtube-dl")
+	sys.exit("Install youtube-dl and try again..")
 
 def banner():
 	os.system('cls' if os.name=='nt' else 'clear')
@@ -19,7 +17,7 @@ def banner():
 ║{ijm} ♚ Project : ᴛᴇʀᴍᴜx-ʏᴅʟ™                {brm}║
 ║{ijm} ♚ Author  : Lusmaysh                   {brm}║
 ║{ijm} ♚ Github  : github.com/Lusmaysh        {brm}║
-║{ijm} ♚ Website : -                          {brm}║
+║{ijm} ♚ Date    : {time.strftime('%d-%b-%Y')}                {brm}║
 ╠════════════════════════════════════════╝""")
 
 def Rerun(s):
@@ -31,21 +29,25 @@ def init():
 	banner()
 	global url
 	url = input(f"{brm}╚═{ijm}▶ [Input URL] ➳ ")
-	while len(url) == 0:
+	if len(url) == 0:
 		init()
-	with open(".history.txt","a") as history:
-		history.write(f"{url}\n")
-	if url == 'auto':
-		banner()
+	if url.lower() == "latest":
+		file = open(".history","r").readlines()
+		url = file[len(file)-1].strip()
+	if not url.startswith("http"):
+		init()
+	if url.startswith("http"):
+		with open(".history","a") as history:
+			history.write(f"{url}\n")
+	if not os.path.exists("/data/data/com.termux/files/home/bin/termux-url-opener") or not os.path.exists("/data/data/com.termux/files/home/.config/youtube-dl/config"):
 		os.system("mkdir -p ~/.config/youtube-dl ~/storage/shared/Youtube ~/bin")
 		with open("/data/data/com.termux/files/home/bin/termux-url-opener","w") as eat:
 			eat.write("youtube-dl $1")
 		with open("/data/data/com.termux/files/home/.config/youtube-dl/config","w") as config:
 			config.write('--no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f "mp4[height<=2160]"')
-		sys.exit(f"{brm}╚═{ijm}▶ Success")
 	banner()
 	type = input(f"""{brm}╠═{ijm}▶ 1. Video Only
-{brm}╠═{ijm}▶ 2. Video With Subtitle
+{brm}╠═{ijm}▶ 2. Video With Subtitle    [ffmpeg req]
 {brm}╠═{ijm}▶ 3. Video With Descripton
 {brm}╠═{ijm}▶ 4. See Video Info
 {brm}╚═{ijm}▶ [𝗦𝗲𝗹𝗲𝗰𝘁 The Option] ➳ """)
@@ -74,7 +76,7 @@ def init():
 		elif format == '7':
 			Rerun('-f "best[height<=2160]"')
 		else:
-			sys.exit(os.system('clear'))
+			sys.exit(os.system('cls' if os.name=='nt' else 'clear'))
 	elif type == '2':
 		banner()
 		lang = input(f"""{brm}╠═{ijm}▶ 1. id (Indonesia Subtitle)
@@ -106,7 +108,7 @@ def init():
 			elif format == '7':
 				Rerun('-f "best[height<=2160]" --write-sub --sub-lang id --convert-subs ass')
 			else:
-				sys.exit(os.system('clear'))
+				sys.exit(os.system('cls' if os.name=='nt' else 'clear'))
 		elif lang == "2":
 			banner()
 			format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
@@ -132,7 +134,7 @@ def init():
 			elif format == '7':
 				Rerun('-f "best[height<=2160]" --write-sub --sub-lang en --convert-subs ass')
 			else:
-				sys.exit(os.system('clear'))
+				sys.exit(os.system('cls' if os.name=='nt' else 'clear'))
 		elif lang == "3":
 			banner()
 			format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
@@ -158,9 +160,9 @@ def init():
 			elif format == '7':
 				Rerun('-f "best[height<=2160]" --write-sub --sub-lang en-US --convert-subs ass')
 			else:
-				sys.exit(os.system('clear'))
+				sys.exit(os.system('cls' if os.name=='nt' else 'clear'))
 		else:
-			sys.exit(os.system('clear'))
+			sys.exit(os.system('cls' if os.name=='nt' else 'clear'))
 	elif type == '3':
 		banner()
 		format = input(f"""{brm}╠═{ijm}▶ 1. Music Mp3♫
@@ -186,17 +188,27 @@ def init():
 		elif format == '7':
 			Rerun('-f "best[height<=2160]" --write-description')
 		else:
-			sys.exit(os.system('clear'))
+			sys.exit(os.system('cls' if os.name=='nt' else 'clear'))
 	elif type == '4':
-		os.system('clear')
-		print(f"[•]Get Description Info..{brm}")
+		os.system('cls' if os.name=='nt' else 'clear')
+		print(f"[•]Video url: {brm}{url}")
+		print(f"{ijm}[•]Get Description Info..{brm}")
 		os.system(f'youtube-dl {url} --no-mtime --get-description')
 		print(f"{ijm}[•]Get Format Info..{brm}")
 		os.system(f'youtube-dl {url} --no-mtime -F')
 		print(f"{ijm}[•]Get Subtitle Info..{brm}")
 		os.system(f'youtube-dl {url} --no-mtime --list-subs')
 	else:
-		sys.exit(os.system('clear'))
+		sys.exit(os.system('cls' if os.name=='nt' else 'clear'))
 
 if __name__=='__main__':
-	init()
+	while True:
+		try:
+			init()
+			retry = input(f"{brm}[•]{ijm}Try again? [Y/N] ")
+			if not retry.lower() == "y" and not retry.lower() == "yes":
+				sys.exit()
+		except KeyboardInterrupt:
+			sys.exit()
+		except IOError:
+			pass
