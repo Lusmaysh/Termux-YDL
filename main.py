@@ -1,10 +1,14 @@
-# Last Update: 17-10-2021, Author: Lusmaysh
+# Last Update: 7-11-2021, Author: Lusmaysh
 import os,sys,time
 ijm="\33[32;1m";brm="\33[36;1m";
+if sys.version[0] < "3":
+	sys.exit("\033[33;1m(!) Please run the tool using Python 3")
 try:
 	import youtube_dl
 except ImportError:
-	sys.exit("Install youtube-dl and try again..")
+	os.system("pip3 install youtube-dl")
+except KeyboardInterrupt:
+	sys.exit()
 
 def banner():
 	os.system('cls' if os.name=='nt' else 'clear')
@@ -27,6 +31,13 @@ def Rerun(s):
 
 def init():
 	banner()
+	if os.path.exists("/data/data/com.termux"):
+		if not os.path.exists("/data/data/com.termux/files/home/bin/termux-url-opener") or not os.path.exists("/data/data/com.termux/files/home/.config/youtube-dl/config"):
+			os.system("mkdir -p ~/.config/youtube-dl ~/storage/shared/Youtube ~/bin")
+			with open("/data/data/com.termux/files/home/bin/termux-url-opener","w") as eat:
+				eat.write("youtube-dl $1")
+			with open("/data/data/com.termux/files/home/.config/youtube-dl/config","w") as config:
+				config.write('--no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f "mp4[height<=2160]"')
 	global url
 	url = input(f"{brm}╚═{ijm}▶ [Input URL] ➳ ")
 	if len(url) == 0:
@@ -39,15 +50,9 @@ def init():
 	if url.startswith("http"):
 		with open(".history","a") as history:
 			history.write(f"{url}\n")
-	if not os.path.exists("/data/data/com.termux/files/home/bin/termux-url-opener") or not os.path.exists("/data/data/com.termux/files/home/.config/youtube-dl/config"):
-		os.system("mkdir -p ~/.config/youtube-dl ~/storage/shared/Youtube ~/bin")
-		with open("/data/data/com.termux/files/home/bin/termux-url-opener","w") as eat:
-			eat.write("youtube-dl $1")
-		with open("/data/data/com.termux/files/home/.config/youtube-dl/config","w") as config:
-			config.write('--no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f "mp4[height<=2160]"')
 	banner()
 	type = input(f"""{brm}╠═{ijm}▶ 1. Video Only
-{brm}╠═{ijm}▶ 2. Video With Subtitle    [ffmpeg req]
+{brm}╠═{ijm}▶ 2. Video With Subtitle    [ffmpeg]
 {brm}╠═{ijm}▶ 3. Video With Descripton
 {brm}╠═{ijm}▶ 4. See Video Info
 {brm}╚═{ijm}▶ [𝗦𝗲𝗹𝗲𝗰𝘁 The Option] ➳ """)
