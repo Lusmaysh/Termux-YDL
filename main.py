@@ -2,12 +2,9 @@ import os,sys,time
 author="Lusmaysh"
 ijm="\33[32;1m";brm="\33[36;1m";
 try:
-	from setup import *
+	from .setup import *
 except ImportError:
 	os.system("curl https://raw.githubusercontent.com/Lusmaysh/termux-ydl/main/setup.py > setup.py")
-	sys.exit("(!) Try Again")
-except KeyboardInterrupt:
-	sys.exit()
 
 def banner():
 	os.system('cls' if os.name=='nt' else 'clear')
@@ -30,7 +27,6 @@ def Rerun(s):
 	os.system(f"youtube-dl {url} --no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%\(title\)s.%\(ext\)s {s}")
 
 def init():
-	banner()
 	if os.path.exists("/data/data/com.termux"):
 		if not os.path.exists("/data/data/com.termux/files/home/storage"):
 			os.system("termux-setup-storage")
@@ -109,6 +105,7 @@ do
 			break
 	esac
 done""")
+	banner()
 	global url
 	url = input(f"{brm}╚═{ijm}▶ [Input URL] ➳ ")
 	if not url:
