@@ -4,7 +4,7 @@ ijm="\33[32;1m";brm="\33[36;1m";
 try:
 	from .setup import *
 except ImportError:
-	os.system("curl https://raw.githubusercontent.com/Lusmaysh/termux-ydl/main/setup.py > setup.py")
+	os.system("curl https://raw.githubusercontent.com/Lusmaysh/termux-ydl/main/.setup.py > setup.py")
 
 def banner():
 	os.system('cls' if os.name=='nt' else 'clear')
