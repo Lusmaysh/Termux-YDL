@@ -1,14 +1,14 @@
 ## Installation For Termux
-#### Install The Requirement
+* Install The Requirement
 ```
 pkg install git && pkg install python && pkg install ffmpeg && pip install youtube-dl
 ```
-#### Clone To Repo
+* Clone To Repo
 ```
 git clone https://github.com/Lusmaysh/Termux-YDL
 ```
-#### Usage
+* Usage
 
-* `cd Termux-YDL`
-* `python main.py`
+`cd Termux-YDL`
+`python main.py`
 
