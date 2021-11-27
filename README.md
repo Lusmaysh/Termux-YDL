@@ -5,10 +5,10 @@ pkg install git && pkg install python && pkg install ffmpeg && pip install youtu
 ```
 * Clone To Repo
 ```
-git clone https://github.com/Lusmaysh/Termux-YDL
+git clone https://github.com/Lusmaysh/termux-ydl
 ```
 * Usage
 
-`cd Termux-YDL`
+`cd termux-ydl`
 `python main.py`
 
